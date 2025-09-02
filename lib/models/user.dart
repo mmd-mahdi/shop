@@ -1,4 +1,6 @@
 
+import "package:myapp/models/cart_item.dart";
+
 class User {
   final String uid;
   final String? email;
@@ -8,6 +10,8 @@ class User {
   final String? phoneNumber;
   final String? address;
   final String? postCode;
+  final List<CartItem> cart;
+  final List<String> favorites;
 
   User({
     required this.uid,
@@ -18,6 +22,8 @@ class User {
     this.phoneNumber,
     this.address,
     this.postCode,
+    this.cart = const [],
+    this.favorites = const [],
   });
 
   factory User.fromMap(Map<String, dynamic> data) {
@@ -30,6 +36,11 @@ class User {
       phoneNumber: data['phoneNumber'],
       address: data['address'],
       postCode: data['postCode'],
+      cart: (data['cart'] as List<dynamic>?)
+              ?.map((item) => CartItem.fromMap(item as Map<String, dynamic>))
+              .toList() ??
+          [],
+      favorites: List<String>.from(data['favorites'] ?? []),
     );
   }
 
@@ -43,6 +54,8 @@ class User {
       'phoneNumber': phoneNumber,
       'address': address,
       'postCode': postCode,
+      'cart': cart.map((item) => item.toMap()).toList(),
+      'favorites': favorites,
     };
   }
 }
