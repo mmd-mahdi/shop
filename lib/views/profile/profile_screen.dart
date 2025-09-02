@@ -5,8 +5,19 @@ import 'package:myapp/views/profile/favorites_screen.dart';
 import 'package:myapp/views/profile/order_history_screen.dart';
 import 'package:myapp/views/profile/personal_data_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +29,7 @@ class ProfileScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.pop(context);
-              },
+              onPressed: _signOut,
             ),
           ],
           bottom: const TabBar(

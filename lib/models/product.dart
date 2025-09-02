@@ -26,4 +26,15 @@ class Product {
       category: json['category'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'price': price,
+      'thumbnail': thumbnail,
+      'category': category,
+    };
+  }
 }

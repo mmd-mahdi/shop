@@ -36,9 +36,9 @@ class AppTheme {
         filled: true,
         fillColor: Colors.grey[200],
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 5,
-        shadowColor: Colors.grey.withOpacity(0.5),
+        shadowColor: Colors.grey.withAlpha(128),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
